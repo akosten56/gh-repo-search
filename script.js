@@ -20,7 +20,7 @@ async function getRepo(repoName) {
     const firstFiveRepo = response.items.slice(0, 5);
     return firstFiveRepo;
   } catch (error) {
-    console.error(error);
+    throw new Error('error');
   }
 }
 
@@ -35,6 +35,9 @@ class Repo {
 function addRepoTips(arrOfRepo) {
   if (autoCompletion.children.length) {
     cleanRepoTips();
+  }
+  if (!arrOfRepo.length) {
+    return;
   }
   let fragment = document.createDocumentFragment();
   for (let i = 0; i < arrOfRepo.length; i++) {
@@ -56,11 +59,10 @@ function cleanRepoTips() {
 
 async function showRepoTips(repoName) {
   const repo = await getRepo(repoName);
-  console.log(repo);
   addRepoTips(repo);
 }
 
-const debounceShowRepoTips = debounce(showRepoTips, 200);
+const debounceShowRepoTips = debounce(showRepoTips, 300);
 
 function addRepoToSaved(repo) {
   const infoOfRepo = JSON.parse(repo.dataset.info);
