@@ -68,11 +68,14 @@ input::-webkit-search-results-decoration { display: none; }
     border-radius: 6px;
     margin-top: 4px;
     padding: 8px;
+    width: 100%; 
+    text-align: start;
 }
 .tip:hover{
     background: #c9c9c9;
 }
 .auto-completion {
+    display: block;
 }
 .save-list {
     margin-top: 20px;
